@@ -9,11 +9,16 @@ class GameSprite(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.transform.scale(pygame.image.load(player_image), (player_width, player_height))
         self.speed = player_speed
+        self.speed_x = 4
+        self.speed_y = 4
         self.rect = self.image.get_rect()
         self.rect.x = player_x
         self.rect.y = player_y
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
+    def update(self):
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
 
 class Player(GameSprite):
     def update(self):
