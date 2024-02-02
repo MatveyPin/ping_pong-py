@@ -38,6 +38,9 @@ ball = GameSprite("tennis_ball.png", 200, 200, 4, 50, 50)
 player1 = Player("platform.png", 20, 200, 7, 100, 50)
 player2 = Player("platform.png", 320, 200, 7, 100, 50)  
 
+font = pygame.font.SysFont("Arial", 26)
+text = font.render("Player2 won", True, (255, 0, 0))
+text2 = font.render("Player1 won", True, (255, 0, 0))
 game = True
 clock = pygame.time.Clock()
 fps = 60
@@ -56,6 +59,18 @@ while game:
         player1.update()
         player2.update1()
         ball.reset()
+
+        if ball.rect.y < -20 or ball.rect.y >= 430:
+            ball.speed_y = -ball.speed_y
+        if ball.rect.x < -75:
+            window.blit(text, (270, 250))
+            finish = True
+        if ball.rect.x > 675:
+            window.blit(text2, (270, 250))
+            finish = True
+        if pygame.sprite.collide_rect(ball, player1) or pygame.sprite.collide_rect(ball, player2):
+            ball.speed_x = -ball.speed_x
+            ball.speed_y = -ball.speed_y
     
     pygame.display.update() 
             
